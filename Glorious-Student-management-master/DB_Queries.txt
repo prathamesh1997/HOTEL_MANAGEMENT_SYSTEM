@@ -1,0 +1,133 @@
+create table TBL_StudentDetails(Stdid varchar(6) constraint Pk Primary key,InstrType varchar(20),
+	Gender char(1) constraint chk check(Gender='F'or Gender='M'),FirstName varchar(20),LastName varchar(20),Dob date,
+	Mothertongue Varchar(20),contact varchar(10),Stdjoindt Date,Grade integer,Occupation varchar(20),
+	OccupationPlace varchar(20),ParentFirstName varchar(25),ParentContact varchar(10),Batchid integer,
+	Address varchar(40));
+  
+  create table Tbl_Batch
+	(
+  	Batchid varchar2(10),
+  	BatchName varchar2(3),
+  	BatchDays varchar2(10),
+  	BatchStartTime TIMESTAMP WITH LOCAL TIME ZONE,
+  	BatchEndTime TIMESTAMP WITH LOCAL TIME ZONE,
+  	constraint btchId_PK primary key(Batchid)
+  	);
+    
+    create table Tbl_Grade
+	(
+	Gradeid varchar(10)constraint Pk_Grade Primary  Key,
+	GradeName varchar(20),
+	Instrtype varchar(20)
+	);
+  
+  create table Tbl_TeacherDetails
+	(
+	Teacherid varchar(10) constraint tdetails_pk Primary Key,
+	Present char constraint chk_pre check(Present='Y' or Present='N'),
+	AttendanceDt date,
+	Batchid varchar(10) ,
+	Day varchar(10),
+	ReplaceTeacherID varchar(20),
+	constraint Fk_tdBid Foreign key(Batchid) REFERENCES  Tbl_Batch(Batchid)
+	);
+  
+  create table Tbl_login
+	(
+	UserName varchar(30) constraint Pk_login Primary Key,
+	Password varchar(30),
+	Admin char constraint chk_Login Check(Admin='Y' or Admin='N')
+	);
+  
+  create table tbl_InstrumentType
+	(
+  	Instrtype varchar(10) constraint tbl_instr Primary Key,
+  	InstrName varchar(30) Not null
+	);
+  
+  
+  create table Tbl_FeePayment
+	(
+	Stdid varchar(6) constraint Fee_PK Primary Key,
+	AdmissionFee Float,
+	EventFee Float,
+	ExamFee FLOAT,
+	FeeFromDt date,
+	FeeToDt date,
+	LateFeeAmt Float,
+	FeePaymentDt date,
+	FeeWaiver FLOAT
+	);
+  
+  create table Tbl_FeeCharges
+	(
+	Gradeid Varchar(6),
+	InstrType Varchar(20),
+	Feecharges float
+	);
+  
+  create table Tbl_module
+	(
+		Moduleid varchar(10) constraint Mod_PK Primary key,
+		ModuleName Varchar(20),
+		InstrType Varchar(20),
+		Active char(5) constraint chkMod check(Active='Y' or Active='N')
+	);
+  
+  create table Tbl_StudentModule
+	(
+	Stdid varchar(6)constraint pk_smodule Primary Key,
+  	Moduleid varchar(10),
+	AssignStartDt date,
+	AssignEndDt date,
+	Status varchar(20),
+	CompletionDt date,
+  	ModuleComment varchar(200)
+	);
+  
+  create table Tbl_Exam
+	(
+	Examid varchar(20),
+	ExamName Varchar(50),
+	InstrType varchar(10),
+	Active varchar(6)
+	);
+  
+  create table Tbl_StudentExam
+	(
+	Stdid varchar(6) constraint Pk_Sexam Primary Key,
+	Examid varchar(20),
+	AssignStartDt date,
+	AssignEnddt date,
+	Status varchar(50),
+	ExamCompleteDt date,
+	ExamsCore varchar(50),
+	ExamComment varchar(100)
+	);
+  
+  create table Tbl_StdAttendance
+	(
+  	Stdid varchar(6) primary key,
+  	Present char constraint chk_att check(Present='Y' or Present='N'),
+  	AttendanceDt date,
+  	Batchid varchar(10)
+	);
+  
+  create table Tbl_TeacherAttendance
+	(
+    	Teacherid varchar(10) Primary Key,
+    	Present char constraint chk_tatt check(Present='Y' or Present='N'),
+  	AttendanceDt date,
+  	Batchid varchar(10),
+   	 Day varchar(20),
+    	ReplaceTeacherid varchar(10)
+ 	 );
+   
+   create table KeyField
+	(
+	InstrumentType varchar(50),
+	Grade varchar(10),
+	FeeAmt Float
+	)
+  
+  select * from TBL_LOGIN
