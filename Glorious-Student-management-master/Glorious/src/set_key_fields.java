@@ -283,7 +283,7 @@ public class set_key_fields extends javax.swing.JFrame {
     }//GEN-LAST:event_save4ActionPerformed
 
     private void save5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save5ActionPerformed
-        // TODO add your handling code here:
+         setVisible(false);new key_fields().setVisible(true);
     }//GEN-LAST:event_save5ActionPerformed
 
     private void type4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_type4ActionPerformed

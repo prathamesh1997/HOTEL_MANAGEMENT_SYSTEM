@@ -253,11 +253,12 @@ public class set_modules extends javax.swing.JFrame {
     }//GEN-LAST:event_searchActionPerformed
 
     private void save1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save1ActionPerformed
-        // TODO add your handling code here:
+         setVisible(false);new module_add_update().setVisible(true);
     }//GEN-LAST:event_save1ActionPerformed
 
     private void save3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save3ActionPerformed
         // TODO add your handling code here:
+        setVisible(false);new module_add_update().setVisible(true);
     }//GEN-LAST:event_save3ActionPerformed
 
     private void save2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save2ActionPerformed

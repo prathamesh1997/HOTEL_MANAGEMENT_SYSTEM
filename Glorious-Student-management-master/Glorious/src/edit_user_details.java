@@ -1,10 +1,13 @@
 
 import Shared.ConnectionManager;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.proteanit.sql.DbUtils;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,17 +25,22 @@ public class edit_user_details extends javax.swing.JFrame {
     /**
      * Creates new form edit_user_details
      */
-    public edit_user_details() {
+    public edit_user_details() throws SQLException {
         try {
             cn=cm.getConnection();
         } catch (Exception e) {
             System.out.println("edit_user_details"+e);
         }
         initComponents();
+        getValues();
     }
 
-    private void getValues()
+    private void getValues() throws SQLException
     {
+        
+        PreparedStatement ps=cn.prepareStatement(" Select * from tbl_login");
+        ResultSet rs = ps.executeQuery();
+        jTable1.setModel(DbUtils.resultSetToTableModel(rs));
         
     }
     /**
@@ -174,20 +182,22 @@ public class edit_user_details extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-        try {
-            Statement st=cn.createStatement();
-            String q="insert into tbl_login values('','','')";
-            int cnt=st.executeUpdate(q);
-            if (cnt>0) {
-                jLabel3.setText("User creation successful");
-            }
-            else
-            {
-                jLabel3.setText("User creation failed");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(edit_user_details.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            Statement st=cn.createStatement();
+//            String q="insert into tbl_login values('','','')";
+//            int cnt=st.executeUpdate(q);
+//            if (cnt>0) {
+//                jLabel3.setText("User creation successful");
+//            }
+//            else
+//            {
+//                jLabel3.setText("User creation failed");
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(edit_user_details.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+         setVisible(false);new add_update().setVisible(true);
+        
     }//GEN-LAST:event_addActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
@@ -209,22 +219,23 @@ public class edit_user_details extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteActionPerformed
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-        Statement st = null;
-        try {
-            st = cn.createStatement();
-            String q="update tbl_login set username='',password='',admin='' where username=''";
-            int cnt=st.executeUpdate(q);
-            if (cnt>0) {
-                jLabel3.setText("User updation successful");
-            }
-            else
-            {
-                jLabel3.setText("User updation failed");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(edit_user_details.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        Statement st = null;
+//        try {
+//            st = cn.createStatement();
+//            String q="update tbl_login set username='',password='',admin='' where username=''";
+//            int cnt=st.executeUpdate(q);
+//            if (cnt>0) {
+//                jLabel3.setText("User updation successful");
+//            }
+//            else
+//            {
+//                jLabel3.setText("User updation failed");
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(edit_user_details.class.getName()).log(Level.SEVERE, null, ex);
+//        }
             
+         setVisible(false);new add_update().setVisible(true);
             
     }//GEN-LAST:event_updateActionPerformed
 
@@ -234,6 +245,7 @@ public class edit_user_details extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
+     * 
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -262,7 +274,11 @@ public class edit_user_details extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new edit_user_details().setVisible(true);
+                try {
+                    new edit_user_details().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(edit_user_details.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

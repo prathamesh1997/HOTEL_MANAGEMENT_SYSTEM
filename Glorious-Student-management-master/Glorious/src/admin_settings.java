@@ -150,7 +150,7 @@ public class admin_settings extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void adminsettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminsettingsActionPerformed
-        setVisible(false);new key_fields().setVisible(true);
+        setVisible(false);new set_key_fields().setVisible(true);
     }//GEN-LAST:event_adminsettingsActionPerformed
 
     private void adminsettings1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminsettings1ActionPerformed

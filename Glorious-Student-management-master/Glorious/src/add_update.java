@@ -1,3 +1,11 @@
+
+import Shared.ConnectionManager;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,11 +17,17 @@
  * @author vinay sawant
  */
 public class add_update extends javax.swing.JFrame {
-
+    Connection cn=null;
+    ConnectionManager cm=new ConnectionManager();
     /**
      * Creates new form add_update
      */
     public add_update() {
+            try {
+            cn=cm.getConnection();
+        } catch (Exception e) {
+            System.out.println("edit_user_details"+e);
+        }
         initComponents();
     }
 
@@ -163,6 +177,37 @@ public class add_update extends javax.swing.JFrame {
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // TODO add your handling code here:
+                try {
+                    //cn=cm.getConnection();
+            Statement st=cn.createStatement();
+                    if (jRadioButton1.isSelected()) {
+                       String q="insert into tbl_login values('"+username1.getText()+"','"+password1.getText()+"','N')";
+            int cnt=st.executeUpdate(q);
+            if (cnt>0) {
+                jLabel3.setText("User creation successful");
+            }
+            else
+            {
+                jLabel3.setText("User creation failed");
+            } 
+            
+                    }
+                    else
+                    {
+                        String q="insert into tbl_login values('"+username1.getText()+"','"+password1.getText()+"','Y')";
+            int cnt=st.executeUpdate(q);
+            if (cnt>0) {
+                jLabel3.setText("User creation successful");
+            }
+            else
+            {
+                jLabel3.setText("User creation failed");
+            }
+                    }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(edit_user_details.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_saveActionPerformed
 
     private void save1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save1ActionPerformed
